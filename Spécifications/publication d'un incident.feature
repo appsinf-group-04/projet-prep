@@ -2,15 +2,17 @@
 
 Fonctionnalité: Publication d'un incident
 
-La publication d'un incident dépend de si l'utiliateur qui souhaite publier 
-est connecté ou non.
+  L'utilisateur peut publier un incident seulement si il est connecté
 
-Scénario: Un utilisateur connecté souhaite publier un incident
-  Étant donné une description de l'incident
-  Et l'adresse où l'incident s'est déroulé
-  Lorsque l'utilisateur veut publier l'incident
-  Alors l'incident est publié avec la description et l'adresse que l'utilisateur a fourni
+  Scénario: Un incident est publié par un utilisateur connecté
+    Étant donné que l'utilisateur est connecté
+    Et une description de l'incident
+    Et l'adresse où l'incident s'est déroulé
+    Lorsque l'utilisateur publie l'incident
+    Alors l'incident est publié avec la description et l'adresse fournie
 
-Scénario: Un utilisateur non connecté souhaite publier un incident
-  Alors la page permettant de publier un incident n'est pas disponnible
-  Et l'utilisateur est invité à se connecter ou créer un compte
+  Scénario: Un incident n'est pas publié par un utilisateur non connecté
+    Étant donné que l'utilisateur n'est pas connecté
+    Lorsque qu'il tente d'accéder à la page de publication d'un incident
+    Alors la page en question n'est pas disponible
+    Et il est redirigé vers la page de connexion

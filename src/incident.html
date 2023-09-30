@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/dist/output.css" rel="stylesheet">
+  <title>Incident</title>
+</head>
+
+<body class="bg-red-700">
+	
+	<!-- EXEMPLE DE NAV BAR A ENLEVER PAR LA SUITE -->
+	<nav class="fixed top-0 right-0 left-0 z-10">
+		<ul class="flex justify-around items-center p-4 bg-white">
+			<li><a href="#" class="p-2 m-4 border-2 border-black">link1</a></li>
+			<li><a href="#" class="p-2 m-4 border-2 border-black">link2</a></li>
+			<li><a href="#" class="p-2 m-4 border-2 border-black">link3</a></li>
+		</ul>
+	</nav>
+	
+
+	<main class="flex justify-center items-center min-h-screen">  <!-- min-h-screen = prend tt la hauteur possible -->
+		<div class="w-96 p-6 rounded-md bg-white shadow-lg">
+			<h1 class="text-center pb-2 mb-4 text-3xl font-bold border-b">
+				Signaler un incident
+			</h1>
+			
+			<form class="flex flex-col justify-center">
+				<label for="description" class="mb-1">Description</label>
+				<textarea id="description" name="description" rows="8" cols="46" maxlength="400" placeholder="décrivez l'incident" required class="resize-none px-2 py-1 mb-4 rounded border-2 focus:outline-none focus:ring-0 focus:border-gray-600"></textarea>
+				<label class="mb-1" for="adresse">Adresse</label>
+				<input type="text" id="adresse" name="adresse" placeholder="exemple: 21, Avenue Rogier, Bruxelles" required class="px-2 py-1 mb-4 rounded border-2 focus:outline-none focus:ring-0 focus:border-gray-600">
+				<input type="submit" value="Publier" class="py-2 px-4 text-white font-semibold bg-red-800 rounded focus:bg-red-900">
+			</form>
+		</div>
+	</main>
+</body>
+
+</html>

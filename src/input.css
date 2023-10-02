@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.main-gradient {
+  @apply bg-gradient-to-br from-red-800 to-red-700
+}
+
+.main-gradient-hover {
+  @apply main-gradient hover:from-red-900 hover:to-red-800
+}

@@ -36,52 +36,6 @@
       class="text-white main-gradient main-gradient-hover font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Signaler
       un incident</button>
 
-    <!-- Début modal contenant le formulaire pour soumettre les incidents -->
-
-    <dialog id="incidentModal"
-      class="p-4 bg-white rounded-lg shadow-[0_0_15px_0_rgba(0,0,0,0.1)] backdrop:backdrop-blur-sm backdrop:bg-transparent">
-
-      <nav class="flex flex-row items-center justify-end">
-        <!-- SVG d'une croix servant de bouton close -->
-        <button id="closeIncidentModal" type="button"
-          class="flex items-center justify-center w-8 h-8 text-sm text-gray-400 rounded-lg hover:bg-gray-200 hover:text-gray-900 ">
-          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-          </svg>
-        </button>
-      </nav>
-
-      <section class="p-4">
-        <h1 class="pb-2 mb-4 text-3xl font-bold text-center border-b">
-          ⚠️<br>
-          Signaler un incident
-        </h1>
-
-        <form class="flex flex-col justify-center">
-          <!-- titre -->
-          <label for="titre" class="mb-1">Titre</label>
-          <input type="text" id="titre" name="titre" placeholder="soyez bref" required
-            class="px-2 py-1 mb-4 bg-gray-100 border-2 border-gray-100 rounded-lg focus:outline-none focus:ring-0 focus:border-gray-400">
-          <!-- description -->
-          <label for="description" class="mb-1">Description</label>
-          <textarea id="description" name="description" rows="8" cols="46" maxlength="400"
-            placeholder="décrivez l'incident" required
-            class="px-2 py-1 mb-4 bg-gray-100 border-2 border-gray-100 rounded-lg resize-none focus:outline-none focus:ring-0 focus:border-gray-400"></textarea>
-          <!-- adresse -->
-          <label class="mb-1" for="adresse">Adresse</label>
-          <input type="text" id="adresse" name="adresse" placeholder="exemple: 21, Rue des Wallons" required
-            class="px-2 py-1 mb-4 bg-gray-100 border-2 border-gray-100 rounded-lg focus:outline-none focus:ring-0 focus:border-gray-400">
-
-          <input type="submit" value="Signaler"
-            class="px-4 py-2 font-semibold text-white transition-all ease-in-out rounded-lg duration-450 main-gradient main-gradient-hover">
-        </form>
-      </section>
-    </dialog>
-
-    <!-- Fin modal du formulaire pour soumettre les incidents -->
-
-
     <input type="search" name="Search" placeholder="Recherche"
       class="block w-1/5 py-2 pl-3 leading-normal text-gray-900 border-0 rounded-md h-fit ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-700">
 
@@ -143,27 +97,51 @@
   <div id="date" class="absolute -translate-x-1/2 bottom-10 left-1/2">
   </div>
 
-  <script>
-    let today = new Date();
-    let day = today.getDay().toString().length == 1 ? "0" + today.getDay() : today.getDay();
-    let month = today.getMonth().toString().length == 1 ? "0" + today.getMonth() : today.getMonth();
-    let year = today.getFullYear();
-    let formatted = "Date du jour: " + day + "/" + month + "/" + year;
-    document.getElementById("date").innerText = formatted;
+  <!-- Début modal contenant le formulaire pour soumettre les incidents -->
+  <dialog id="incidentModal"
+    class="p-4 bg-white rounded-lg shadow-[0_0_15px_0_rgba(0,0,0,0.1)] backdrop:backdrop-blur-sm backdrop:bg-transparent">
 
-    // Partie pour le modal du formulaire d'incident
-    const showIncidentModal = document.getElementById('showIncidentModal')
-    const closeIncidentModal = document.getElementById('closeIncidentModal')
-    const incidentModal = document.getElementById('incidentModal')
+    <nav class="flex flex-row items-center justify-end">
+      <!-- SVG d'une croix servant de bouton close -->
+      <button id="closeIncidentModal" type="button"
+        class="flex items-center justify-center w-8 h-8 text-sm text-gray-400 rounded-lg hover:bg-gray-200 hover:text-gray-900 ">
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+      </button>
+    </nav>
 
-    showIncidentModal.addEventListener('click', () => {
-      incidentModal.showModal();
-    })
-    closeIncidentModal.addEventListener('click', () => {
-      incidentModal.close();
-    })
+    <section class="p-4">
+      <h1 class="pb-2 mb-4 text-3xl font-bold text-center border-b">
+        ⚠️<br>
+        Signaler un incident
+      </h1>
 
-  </script>
+      <form class="flex flex-col justify-center">
+        <!-- titre -->
+        <label for="titre" class="mb-1">Titre</label>
+        <input type="text" id="titre" name="titre" placeholder="soyez bref" required
+          class="px-2 py-1 mb-4 bg-gray-100 border-2 border-gray-100 rounded-lg focus:outline-none focus:ring-0 focus:border-gray-400">
+        <!-- description -->
+        <label for="description" class="mb-1">Description</label>
+        <textarea id="description" name="description" rows="8" cols="46" maxlength="400"
+          placeholder="décrivez l'incident" required
+          class="px-2 py-1 mb-4 bg-gray-100 border-2 border-gray-100 rounded-lg resize-none focus:outline-none focus:ring-0 focus:border-gray-400"></textarea>
+        <!-- adresse -->
+        <label class="mb-1" for="adresse">Adresse</label>
+        <input type="text" id="adresse" name="adresse" placeholder="exemple: 21, Rue des Wallons" required
+          class="px-2 py-1 mb-4 bg-gray-100 border-2 border-gray-100 rounded-lg focus:outline-none focus:ring-0 focus:border-gray-400">
+
+        <input type="submit" value="Signaler"
+          class="px-4 py-2 font-semibold text-white transition-all ease-in-out rounded-lg duration-450 main-gradient main-gradient-hover">
+      </form>
+    </section>
+  </dialog>
+
+  <!-- Fin modal du formulaire pour soumettre les incidents -->
+
+  <script src="./index.js"></script>
 </body>
 
 </html>

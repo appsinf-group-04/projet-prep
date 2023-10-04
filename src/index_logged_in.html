@@ -151,35 +151,6 @@
     let formatted = "Date du jour: " + day + "/" + month + "/" + year;
     document.getElementById("date").innerText = formatted;
 
-
-    // Les parties suivantes gèrent les modals pour login/register/incident
-
-    // Partie pour le modal login
-    const showModal = document.getElementById('showLoginModal');
-    const closeModal = document.getElementById('closeLoginModal');
-    const loginModal = document.getElementById('loginModal');
-
-    showModal.addEventListener('click', () => {
-      loginModal.showModal();
-    });
-
-    closeModal.addEventListener('click', () => {
-      loginModal.close();
-    });
-
-    // Partie pour le modal register
-    const showRegisterModal = document.getElementById('showRegisterModal');
-    const closeRegisterModal = document.getElementById('closeRegisterModal');
-    const registerModal = document.getElementById('registerModal');
-
-    showRegisterModal.addEventListener('click', () => {
-      registerModal.showModal();
-    });
-
-    closeRegisterModal.addEventListener('click', () => {
-      registerModal.close();
-    });
-
     // Partie pour le modal du formulaire d'incident
     const showIncidentModal = document.getElementById('showIncidentModal')
     const closeIncidentModal = document.getElementById('closeIncidentModal')

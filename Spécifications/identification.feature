@@ -2,7 +2,7 @@
 
 Fonctionnalité: Connexion d'un utilisateur
 
-  L'utilisateur doit se connecter afin de pouvoir publier des incidents sur la plateforme
+  L'utilisateur doit se connecter afin de pouvoir signaler des incidents sur la plateforme
 
   Contexte:
     Étant donné que l'utilisateur a créé un compte au préalable

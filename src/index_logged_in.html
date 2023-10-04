@@ -143,27 +143,7 @@
   <div id="date" class="absolute -translate-x-1/2 bottom-10 left-1/2">
   </div>
 
-  <script>
-    let today = new Date();
-    let day = today.getDay().toString().length == 1 ? "0" + today.getDay() : today.getDay();
-    let month = today.getMonth().toString().length == 1 ? "0" + today.getMonth() : today.getMonth();
-    let year = today.getFullYear();
-    let formatted = "Date du jour: " + day + "/" + month + "/" + year;
-    document.getElementById("date").innerText = formatted;
-
-    // Partie pour le modal du formulaire d'incident
-    const showIncidentModal = document.getElementById('showIncidentModal')
-    const closeIncidentModal = document.getElementById('closeIncidentModal')
-    const incidentModal = document.getElementById('incidentModal')
-
-    showIncidentModal.addEventListener('click', () => {
-      incidentModal.showModal();
-    })
-    closeIncidentModal.addEventListener('click', () => {
-      incidentModal.close();
-    })
-
-  </script>
+  <script src="./index.js"></script>
 </body>
 
 </html>

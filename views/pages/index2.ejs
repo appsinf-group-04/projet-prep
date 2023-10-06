@@ -4,14 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../dist/output.css" rel="stylesheet">
+  <link href="/public/css/output.css" rel="stylesheet">
 </head>
 
 <body>
   <header class="py-3 drop-shadow-md main-gradient">
     <div class="flex flex-row items-center justify-between w-4/5 mx-auto ">
       <div id="logo-name" class="flex items-center">
-        <img src="../public/images/ferris.jpg" alt="Ferris" class="box-border rounded-full w-14 h-14">
+        <img src="/public/images/ferris.jpg" alt="Ferris" class="box-border rounded-full w-14 h-14">
         <h1 class="ml-5 text-2xl font-bold text-white">Website name</h1>
       </div>
       <nav class="flex justify-end w-1/2 text-white ">
@@ -22,7 +22,7 @@
   </header>
 
   <div class="flex flex-col items-center justify-center w-full">
-    <a href="./index_logged_out.html"
+    <a href="/"
       class="px-4 py-2 mt-2 text-white rounded-md w-fit main-gradient main-gradient-hover">Switch to
       logged out</a>
     <p class="w-1/4 text-center">Ce bouton est temporaire et sert à montrer ce qu'il se passera lorsque l'utilisateur
@@ -118,7 +118,7 @@
         Signaler un incident
       </h1>
 
-      <form class="flex flex-col justify-center">
+      <form class="flex flex-col justify-center" method="post" action="/incidents/create">
         <!-- titre -->
         <label for="titre" class="mb-1">Titre</label>
         <input type="text" id="titre" name="titre" placeholder="soyez bref" required
@@ -141,7 +141,7 @@
 
   <!-- Fin modal du formulaire pour soumettre les incidents -->
 
-  <script src="./index.js"></script>
+  <script src="/public/js/index.js"></script>
 </body>
 
 </html>

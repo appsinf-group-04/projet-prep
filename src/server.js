@@ -22,10 +22,7 @@ app
 app.listen(process.env.PORT || 8080, () => {
   console.log("Listening at http://localhost:8080");
 
-  mongoose.connect("mongodb://localhost:27017/projet-prep", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  mongoose.connect("mongodb://localhost:27017/projet-prep")
     .then(() => console.log("Connected to MongoDB"))
     .catch((err) => console.log(err));
 });

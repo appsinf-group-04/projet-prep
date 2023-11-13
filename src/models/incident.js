@@ -8,10 +8,7 @@ const incidentSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    }
+    name: String
 });
 
 module.exports = model('Incident', incidentSchema);

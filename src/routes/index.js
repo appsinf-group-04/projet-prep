@@ -2,29 +2,14 @@ const router = require('express').Router();
 const crypto = require('crypto');
 
 const User = require('../models/user');
+const Incident = require('../models/incident');
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
 
   let loggedIn = req.session.user ? true : false;
 
-  let incidents = [
-    {
-      title: "Test",
-      date: Date.now(),
-      address: "Address",
-      user: {
-        fullname: "User",
-      }
-    },
-    {
-      title: "Test2",
-      date: Date.now(),
-      address: "Address",
-      user: {
-        fullname: "User",
-      }
-    }
-  ];
+  // récupère tous les incidents dans une liste
+  const incidents = await Incident.find({})
 
   res.render("pages/index", { incidents, loggedIn, user: req.session.user });
 });

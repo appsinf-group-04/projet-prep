@@ -1,11 +1,25 @@
 const router = require("express").Router();
 
-router.post("/create", (req, res) => {
+const Incident = require('../models/incident');
+const User = require('../models/user');
 
-  let body = req.body;
-  console.log(body);
+router.post("/create", async (req, res) => {
 
-  res.redirect("/2");
+  // récupère le NOM ET PRENOM et pas le pseudo
+  User.findOne({ username: req.session.user });
+  
+  const { title, description, address } = req.body;
+  const incident = new Incident({
+    title: title,
+    description: description,
+    address: address,
+    name: req.session.user.name
+  })
+
+  await incident.save()
+  console.log('incident saved')
+
+  res.redirect("/");
 });
 
 module.exports = router;

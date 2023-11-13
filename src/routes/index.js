@@ -1,10 +1,27 @@
 const router = require('express').Router();
 
 router.get("/", (req, res) => {
-  res.render("pages/index");
+  let loggedIn = false;
+  let incidents = [
+    {
+      title: "Test",
+      date: Date.now(),
+      address: "Address",
+      user: {
+        fullname: "User",
+      }
+    },
+    {
+      title: "Test2",
+      date: Date.now(),
+      address: "Address",
+      user: {
+        fullname: "User",
+      }
+    }
+  ];
+
+  res.render("pages/index", { incidents, loggedIn });
 });
-router.get("/2", (req, res) => {
-  res.render("pages/index2");
-})
 
 module.exports = router;

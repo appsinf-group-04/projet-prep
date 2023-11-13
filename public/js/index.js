@@ -7,12 +7,12 @@ let formatted = "Date du jour: " + day + "/" + month + "/" + year;
 document.getElementById("date").innerText = formatted;
 
 // LOGIN MODAL
-const showLoginModal = document.getElementById('showLoginModal');
+const showLoginModal = document.getElementsByClassName('showLoginModal');
 const closeLoginModal = document.getElementById('closeLoginModal');
 const loginModal = document.getElementById('loginModal');
 
-if (showLoginModal) {
-  showLoginModal.addEventListener('click', () => {
+for (let modal of showLoginModal) {
+  modal.addEventListener('click', () => {
     loginModal.showModal();
   });
 
@@ -26,7 +26,7 @@ const showRegisterModal = document.getElementById('showRegisterModal');
 const closeRegisterModal = document.getElementById('closeRegisterModal');
 const registerModal = document.getElementById('registerModal');
 
-if(showRegisterModal) {
+if (showRegisterModal) {
   showRegisterModal.addEventListener('click', () => {
     registerModal.showModal();
   });
@@ -37,19 +37,11 @@ if(showRegisterModal) {
 }
 
 // INCIDENT MODAL
-const showIncidentModal = document.getElementById('showIncidentModal')
+const showIncidentModal = document.getElementsByClassName('showIncidentModal')[0]
 const closeIncidentModal = document.getElementById('closeIncidentModal')
 const incidentModal = document.getElementById('incidentModal')
 
-if (showIncidentModal && showLoginModal){ // Si les deux sont visibles => non authentifié => on affiche le modal de connexion
-  showIncidentModal.addEventListener('click', () => {
-    loginModal.showModal();
-  });
-
-  closeIncidentModal.addEventListener('click', () => {
-    loginModal.close();
-  });
-} else {
+if (showIncidentModal) {
   showIncidentModal.addEventListener('click', () => {
     incidentModal.showModal();
   });

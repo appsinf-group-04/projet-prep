@@ -10,9 +10,10 @@
         <button class="mr-6 hover:underline showLoginModal">S'identifier</button>
         <button id="showRegisterModal" class="hover:underline">Créer un compte</button>
       <% } else { %>
-        <a href="#" class="mr-6 hover:underline">Nom d'utilisateur (logout)</a>
+        <form action="/logout" method="POST">
+          <input type="submit" class="mr-6 hover:underline"><%= user.name %> (logout)</input>
+        </form>
       <% } %>
     </nav>
   </div>
 </header>
-

@@ -3,6 +3,7 @@ const express = require("express");
 const { default: mongoose } = require("mongoose");
 const session = require("express-session");
 const crypto = require("crypto");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -17,7 +18,10 @@ app
   .use("/incidents", require("./routes/incident"))
   .use(session({
     secret : "secret",
-  }));
+    resave : false,
+    saveUninitialized : true,
+  }))
+  .use(cookieParser());
 
 app.listen(process.env.PORT || 8080, () => {
   console.log("Listening at http://localhost:8080");

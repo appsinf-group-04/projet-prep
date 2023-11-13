@@ -5,15 +5,7 @@ const User = require('../models/user');
 
 router.get("/", (req, res) => {
 
-  let loggedIn = false;
-  let user = null;
-
-  if (req.session && req.session.user) {
-    loggedIn = true;
-    user = req.session.user;
-  }
-
-  console.log(req.session);
+  let loggedIn = req.session.user ? true : false;
 
   let incidents = [
     {
@@ -34,7 +26,7 @@ router.get("/", (req, res) => {
     }
   ];
 
-  res.render("pages/index", { incidents, loggedIn, user });
+  res.render("pages/index", { incidents, loggedIn, user: req.session.user });
 });
 
 router.post("/signup", async (req, res) => {
@@ -53,6 +45,9 @@ router.post("/signup", async (req, res) => {
 
   // Insert the user data into the database
   await user.save();
+
+  req.session.user = { name: user.name };
+
   res.redirect("/");
 });
 
@@ -79,10 +74,7 @@ router.post("/login", async (req, res) => {
   }
 
   // If the password is correct, log the user in
-  console.log("User logged in");
-
-  // c'est censé marcher ça bordel
-  req.session.user = user;
+  req.session.user = { name: user.name };
 
   res.redirect('/');
 });

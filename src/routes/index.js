@@ -1,8 +1,20 @@
 const router = require('express').Router();
+const crypto = require('crypto');
+
 const User = require('../models/user');
 
 router.get("/", (req, res) => {
+
   let loggedIn = false;
+  let user = null;
+
+  if (req.session && req.session.user) {
+    loggedIn = true;
+    user = req.session.user;
+  }
+
+  console.log(req.session);
+
   let incidents = [
     {
       title: "Test",
@@ -22,7 +34,7 @@ router.get("/", (req, res) => {
     }
   ];
 
-  res.render("pages/index", { incidents, loggedIn });
+  res.render("pages/index", { incidents, loggedIn, user });
 });
 
 router.post("/signup", async (req, res) => {
@@ -68,12 +80,15 @@ router.post("/login", async (req, res) => {
 
   // If the password is correct, log the user in
   console.log("User logged in");
-  req.session.user = { name: user.name };
+
+  // c'est censé marcher ça bordel
+  req.session.user = user;
+
   res.redirect('/');
 });
 
 router.post("/logout", (req, res) => {
-  req.session = {};
+  req.session.destroy();
   res.redirect("/");
 });
 

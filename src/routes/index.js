@@ -7,13 +7,14 @@ const Incident = require('../models/incident');
 router.get("/", async (req, res) => {
 
   let loggedIn = req.session.user ? true : false;
+  let error = req.session.error;
 
   // récupère tous les incidents dans une liste
   const incidents = await Incident.find({})
     .sort({ date: -1 })
     .limit(20);
 
-  res.render("pages/index", { incidents, loggedIn, user: req.session.user });
+  res.render("pages/index", { incidents, loggedIn, user: req.session.user, error });
 });
 
 router.post("/signup", async (req, res) => {
@@ -23,14 +24,16 @@ router.post("/signup", async (req, res) => {
   hash.update(password);
   const hashedPassword = hash.digest('hex');
 
-  const user = new User({
-    username: username,
-    password: hashedPassword,
-    name: name,
-    email: email,
-  });
+  // New code to verifie if the user already exists
+  const userExists = await User.findOne({ username: username });
 
-  // Insert the user data into the database
+  if (userExists) {
+    console.log("User already exists");
+    req.session.error = "User already exists";
+    return res.redirect("/");
+  }
+  // and end here
+
   await user.save();
 
   req.session.user = { name: user.name };

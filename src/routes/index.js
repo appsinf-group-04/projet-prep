@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 
   // récupère tous les incidents dans une liste
   const incidents = await Incident.find({})
-    .sort({ Date: -1 })
+    .sort({ date: -1 })
     .limit(20);
 
   res.render("pages/index", { incidents, loggedIn, user: req.session.user });

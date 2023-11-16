@@ -51,11 +51,16 @@ if (showIncidentModal) {
   });
 }
 
+// Fonction gérant l'affichage des descriptions des incidents sur la page principale
 function showDescription(descriptionID) {
   let description = document.getElementById(descriptionID);
-  if (description.style.display == 'none') {
-    description.style.display = 'block';
+  let hideShowBtn = document.getElementById('hideShowDescriptionBtn'+descriptionID);
+  console.log('hideShowDescriptionBtn'+descriptionID);
+  if (description.style.display != "table-row") {
+    description.style.display = 'table-row';
+    hideShowBtn.textContent = 'Réduire le contenu'
   } else {
     description.style.display = 'none';
+    hideShowBtn.textContent = "plus d'informations";
   }
 }

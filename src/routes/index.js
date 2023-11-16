@@ -8,13 +8,14 @@ router.get("/", async (req, res) => {
 
   let loggedIn = req.session.user ? true : false;
   let error = req.session.error;
+  let incorrect = req.session.incorrect;
 
   // récupère tous les incidents dans une liste
   const incidents = await Incident.find({})
     .sort({ date: -1 })
     .limit(20);
 
-  res.render("pages/index", { incidents, loggedIn, user: req.session.user, error });
+  res.render("pages/index", { incidents, loggedIn, user: req.session.user, error, incorrect });
 });
 
 router.post("/signup", async (req, res) => {
@@ -58,8 +59,12 @@ router.post("/login", async (req, res) => {
   const hashedPassword = hash.digest('hex');
 
   // Compare the hashed password with the stored password
-  if (hashedPassword !== user.password) {
+
+  const incorrect = hashedPassword !== user.password;
+
+  if (incorrect) {
     console.log("Invalid password");
+    req.session.error = "Mot de passe incorrect";
     return res.redirect('/');
   }
 

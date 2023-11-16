@@ -50,3 +50,22 @@ if (showIncidentModal) {
     incidentModal.close();
   });
 }
+
+// Search
+let delayTimer;
+
+function handleSearch() {
+  clearTimeout(delayTimer);
+
+  let x = document.getElementById("search-bar");
+
+  delayTimer = setTimeout(() => {
+    if (x.value.length > 0) {
+      const currentURL = new URL(window.location.href);
+      currentURL.searchParams.set("q", x.value);
+      window.location.href = currentURL.toString();
+    } else {
+      window.location.href = "/";
+    }
+  }, 800);
+}

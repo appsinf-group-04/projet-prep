@@ -50,3 +50,12 @@ if (showIncidentModal) {
     incidentModal.close();
   });
 }
+
+function showDescription(descriptionID) {
+  let description = document.getElementById(descriptionID);
+  if (description.style.display == 'none') {
+    description.style.display = 'block';
+  } else {
+    description.style.display = 'none';
+  }
+}

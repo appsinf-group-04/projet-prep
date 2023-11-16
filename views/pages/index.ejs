@@ -15,7 +15,7 @@
       class="text-white main-gradient main-gradient-hover font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none <%= loggedIn ? 'showIncidentModal' : 'showLoginModal' %>">Signaler
       un incident</button>
 
-    <input type="search" name="Search" placeholder="Recherche"
+    <input type="search" name="Search" placeholder="Recherche" id="search-bar" onkeyup="handleSearch()" value="<%= query %>"
       class="block w-1/5 py-2 pl-3 leading-normal text-gray-900 border-0 rounded-md h-fit ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-700">
 
   </div>
@@ -42,9 +42,15 @@
             </td>
           </tr>
         <% } %>
-        </tbody>
+      </tbody>
     </table>
   </div>
+  <% if(query && incidents.length == 0) { %>
+    <div class="flex justify-center pt-4">
+      <p class="text-gray-500">Aucun résultat trouvé pour votre recherche.</p>
+    </div>
+  <% } %>
+
 
   <div id="date" class="absolute -translate-x-1/2 bottom-10 left-1/2"></div>
 
@@ -54,6 +60,25 @@
   <%- include("../components/incidentModal.ejs") %>
   
   <script src="/public/js/index.js"></script>
+  <script> 
+    let delayTimer;
+
+    function handleSearch() {
+      clearTimeout(delayTimer);
+
+      let x = document.getElementById("search-bar");
+
+      delayTimer = setTimeout(() => {
+        if (x.value.length > 0) {
+          const currentURL = new URL(window.location.href);
+          currentURL.searchParams.set("q", x.value);
+          window.location.href = currentURL.toString();
+        } else {
+          window.location.href = "/";
+        }
+      }, 800);
+    }
+  </script>
 </body>
 
 </html>

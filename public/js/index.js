@@ -49,6 +49,7 @@ if (showIncidentModal) {
   closeIncidentModal.addEventListener('click', () => {
     incidentModal.close();
   });
+
 }
 
 // Search

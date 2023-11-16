@@ -50,6 +50,7 @@ router.post("/login", async (req, res) => {
 
   if (!user) {
     console.log("User not found");
+    req.session.error = "Utilisateur non trouvé";
     return res.redirect('/');
   }
 

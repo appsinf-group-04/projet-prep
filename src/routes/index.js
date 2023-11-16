@@ -8,12 +8,29 @@ router.get("/", async (req, res) => {
 
   let loggedIn = req.session.user ? true : false;
 
-  // récupère tous les incidents dans une liste
-  const incidents = await Incident.find({})
-    .sort({ date: -1 })
-    .limit(20);
+  let query = req.query.q;
+  let incidents = [];
 
-  res.render("pages/index", { incidents, loggedIn, user: req.session.user });
+  if (query) {
+    const regex = new RegExp(query, 'i');
+
+    incidents = await Incident.find({
+      $or: [
+        { title: regex },
+        { description: regex },
+        { address: regex },
+        { name: regex },
+      ]
+    })
+      .sort({ date: -1 })
+      .limit(20);
+  } else {
+    incidents = await Incident.find({})
+      .sort({ date: -1 })
+      .limit(20);
+  }
+
+  res.render("pages/index", { incidents, loggedIn, user: req.session.user, query });
 });
 
 router.post("/signup", async (req, res) => {

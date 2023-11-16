@@ -8,14 +8,13 @@ router.get("/", async (req, res) => {
 
   let loggedIn = req.session.user ? true : false;
   let error = req.session.error;
-  let incorrect = req.session.incorrect;
 
   // récupère tous les incidents dans une liste
   const incidents = await Incident.find({})
     .sort({ date: -1 })
     .limit(20);
 
-  res.render("pages/index", { incidents, loggedIn, user: req.session.user, error, incorrect });
+  res.render("pages/index", { incidents, loggedIn, user: req.session.user, error});
 });
 
 router.post("/signup", async (req, res) => {
@@ -24,6 +23,13 @@ router.post("/signup", async (req, res) => {
   const hash = crypto.createHash('sha256');
   hash.update(password);
   const hashedPassword = hash.digest('hex');
+
+  const user = new User({
+    username: username,
+    password: hashedPassword,
+    name: name,
+    email: email,
+  });
 
   // New code to verifie if the user already exists
   const userExists = await User.findOne({ username: username });
@@ -38,6 +44,8 @@ router.post("/signup", async (req, res) => {
   await user.save();
 
   req.session.user = { name: user.name };
+
+  req.session.error = null;
 
   res.redirect("/");
 });
@@ -71,6 +79,8 @@ router.post("/login", async (req, res) => {
 
   // If the password is correct, log the user in
   req.session.user = { name: user.name };
+
+  req.session.error = null;
 
   res.redirect('/');
 });

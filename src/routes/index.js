@@ -29,8 +29,8 @@ router.post("/signup", async (req, res) => {
 
   if (userExists) {
     console.log("User already exists");
-    req.session.error = "User already exists";
-    return res.redirect("/");
+    req.session.error = "Nom d'utilisateur déjà existant";
+    return res.redirect('/');
   }
   // and end here
 

@@ -78,7 +78,7 @@ function showDescription(descriptionID) {
   console.log('hideShowDescriptionBtn'+descriptionID);
   if (description.style.display != "table-row") {
     description.style.display = 'table-row';
-    hideShowBtn.textContent = 'Réduire le contenu'
+    hideShowBtn.textContent = 'réduire le contenu'
   } else {
     description.style.display = 'none';
     hideShowBtn.textContent = "plus d'informations";

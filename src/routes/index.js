@@ -31,6 +31,7 @@ router.get("/", async (req, res) => {
       .limit(20);
   }
 
+  req.session.error = null;
   res.render("pages/index", { incidents, loggedIn, user: req.session.user, error, query });
 });
 

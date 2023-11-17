@@ -18,6 +18,7 @@
     <button  type="button"
       class="text-white main-gradient main-gradient-hover font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none <%= loggedIn ? 'showIncidentModal' : 'showLoginModal' %>">Signaler
       un incident</button>
+    <div id="date" class="absolute -translate-x-1/2 left-1/2"></div>
 
     <input type="search" name="Search" placeholder="Recherche" id="search-bar" onkeyup="handleSearch()" value="<%= query %>"
       class="block w-1/5 py-2 pl-3 leading-normal text-gray-900 border-0 rounded-md h-fit ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-700">
@@ -25,7 +26,7 @@
   </div>
 
   <div class="flex justify-center pt-4 overflow-x-auto">
-    <table class="w-4/5 divide-y divide-gray-200 ">
+    <table class="w-4/5 divide-y divide-gray-200">
       <thead>
         <tr>
           <th scope="col" class="px-6 py-3 text-xs font-medium text-left text-gray-500 uppercase">Titre</th>
@@ -34,16 +35,19 @@
           <th scope="col" class="px-6 py-3 text-xs font-medium text-left text-gray-500 uppercase">Date</th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-gray-200 ">
+      <tbody class="divide-y divide-gray-200">
         <% for(var i=0; i < incidents.length; i++) { %>
           <tr class="hover:bg-gray-100 ">
             <td class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap "><%= incidents[i].title %></td>
-            <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap "><%= incidents[i].address %></td>
+            <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap"><%= incidents[i].address %></td>
             <td class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap "><%= incidents[i].name %></td>
             <td class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap "><%= incidents[i].date.toLocaleDateString("fr-FR") %></td>
             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-              <a class="text-blue-500 hover:text-blue-700" href="#">Plus d'informations</a>
+              <button id="hideShowDescriptionBtn<%= i %>" onclick="showDescription('<%= i %>')" class="text-blue-500 hover:text-blue-700">plus d'informations</button>
             </td>
+          </tr>
+          <tr id="<%= i %>" class="hidden">
+            <td colspan="5" class="px-6 py-4 text-sm text-gray-800 text-justify break-all"><%= incidents[i].description %></td>
           </tr>
         <% } %>
       </tbody>
@@ -55,8 +59,6 @@
     </div>
   <% } %>
 
-
-  <div id="date" class="absolute -translate-x-1/2 bottom-10 left-1/2"></div>
 
   <!-- MODALS-->
   <%- include("../components/loginModal.ejs") %>

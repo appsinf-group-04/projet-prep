@@ -8,7 +8,10 @@
     "tw": "npx tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch",
     "dev": "nodemon src/server.js --delay 100ms",
     "start": "node src/server.js",
-    "db": "mongod --dbpath ./data"
+    "db": "mongod --dbpath ./data",
+    "mkcert": "mkcert -key-file key.pem -cert-file cert.pem localhost 127.0.0.1 localhost ::1",
+    "mkcert:i": "mkcert -install",
+    "cert": "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365"
   },
   "keywords": [],
   "author": "",

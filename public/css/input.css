@@ -9,3 +9,9 @@
 .main-gradient-hover {
   @apply main-gradient hover:from-red-900 hover:to-red-800
 }
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}

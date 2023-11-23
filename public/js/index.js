@@ -51,16 +51,16 @@ if (showIncidentModal) {
 
 // Search
 let delayTimer;
+let search = document.getElementById("search-bar");
 
 function handleSearch() {
   clearTimeout(delayTimer);
 
-  let x = document.getElementById("search-bar");
 
   delayTimer = setTimeout(() => {
-    if (x.value.length > 0) {
+    if (search.value.length > 0) {
       const currentURL = new URL(window.location.href);
-      currentURL.searchParams.set("q", x.value);
+      currentURL.searchParams.set("q", search.value);
       window.location.href = currentURL.toString();
     } else {
       window.location.href = "/";

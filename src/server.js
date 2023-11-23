@@ -2,6 +2,8 @@ const path = require("path");
 const express = require("express");
 const { default: mongoose } = require("mongoose");
 const session = require("express-session");
+const https = require("https");
+const fs = require("fs");
 
 const app = express();
 
@@ -20,9 +22,12 @@ app
   .use("/", require("./routes/index"))
   .use("/incidents", require("./routes/incident"))
 
-
-app.listen(process.env.PORT || 8080, () => {
-  console.log("Listening at http://localhost:8080");
+https.createServer({
+  key: fs.readFileSync('./key.pem'),
+  cert: fs.readFileSync('./cert.pem'),
+  passphrase: 'secret'
+}, app).listen(process.env.PORT || 8080, () => {
+  console.log("Listening at https://localhost:8080");
 
   mongoose.connect("mongodb://127.0.0.1:27017/projet-prep")
     .then(() => console.log("Connected to MongoDB"))

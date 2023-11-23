@@ -4,3 +4,5 @@ data/
 package-lock.json
 public/css/output.css
 .DS_Store
+cert.pem
+key.pem

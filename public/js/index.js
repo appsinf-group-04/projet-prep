@@ -1,10 +1,7 @@
 // DATE
-let today = new Date();
-let day = today.getDay().toString().length == 1 ? "0" + today.getDay() : today.getDay();
-let month = today.getMonth().toString().length == 1 ? "0" + today.getMonth() : today.getMonth();
-let year = today.getFullYear();
-let formatted = "Date du jour: " + day + "/" + month + "/" + year;
-document.getElementById("date").innerText = formatted;
+let today = new Date()
+  .toLocaleDateString("fr-FR");
+document.getElementById("date").innerText = "Date du jour: " + today;
 
 // LOGIN MODAL
 const showLoginModal = document.getElementsByClassName('showLoginModal');
@@ -74,8 +71,8 @@ function handleSearch() {
 // Fonction gérant l'affichage des descriptions des incidents sur la page principale
 function showDescription(descriptionID) {
   let description = document.getElementById(descriptionID);
-  let hideShowBtn = document.getElementById('hideShowDescriptionBtn'+descriptionID);
-  console.log('hideShowDescriptionBtn'+descriptionID);
+  let hideShowBtn = document.getElementById('hideShowDescriptionBtn' + descriptionID);
+  console.log('hideShowDescriptionBtn' + descriptionID);
   if (description.style.display != "table-row") {
     description.style.display = 'table-row';
     hideShowBtn.textContent = 'réduire le contenu'

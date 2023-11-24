@@ -11,7 +11,7 @@
         <button id="showRegisterModal" class="hover:underline">Créer un compte</button>
       <% } else { %>
         <form action="/logout" method="POST">
-          <button type="submit" class="mr-6 hover:underline"><%= user.name %> (logout)</button>
+          <button type="submit" class="mr-6 hover:underline"><%= user.name %> (déconnexion)</button>
         </form>
       <% } %>
     </nav>

@@ -15,7 +15,7 @@ Installation des paquets npm
 ```
 $ npm install
 ```
-Génération du certificat https
+Génération du certificat https, le secret: "secret" (original oui)
   ```
   $ npm run cert
   ```

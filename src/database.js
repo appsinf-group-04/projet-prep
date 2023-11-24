@@ -1,5 +1,6 @@
 const Incident = require('./models/incident');
 const User = require('./models/user');
+const crypto = require('crypto');
 
 /**
   * @param {string} title

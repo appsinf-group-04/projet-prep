@@ -2,7 +2,7 @@ const router = require('express').Router();
 const crypto = require('crypto');
 
 const User = require('../models/user');
-const { getIncidents, searchIncident, accountExists } = require('../database');
+const { getIncidents, searchIncident, accountExists, createAccount } = require('../database');
 
 router.get("/", async (req, res) => {
 

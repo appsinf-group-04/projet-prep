@@ -1,20 +1,13 @@
 const router = require("express").Router();
 
-const Incident = require('../models/incident');
-const User = require('../models/user');
 const checkAuth = require('../middlewares/auth');
+const { createIncident } = require('../database');
 
 router.post("/create", checkAuth, async (req, res) => {
-  
-  const { title, description, address } = req.body;
-  const incident = new Incident({
-    title: title,
-    description: description,
-    address: address,
-    name: req.session.user.name
-  })
 
-  await incident.save()
+  const { title, description, address } = req.body;
+  await createIncident(title, description, address, req.session.user.name);
+
   console.log('incident saved')
 
   res.redirect("/");

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const crypto = require('crypto');
 
 const User = require('../models/user');
-const Incident = require('../models/incident');
+const { getIncidents, searchIncident, accountExists } = require('../database');
 
 router.get("/", async (req, res) => {
 
@@ -15,20 +15,9 @@ router.get("/", async (req, res) => {
   if (query) {
     const regex = new RegExp(query, 'i');
 
-    incidents = await Incident.find({
-      $or: [
-        { title: regex },
-        { description: regex },
-        { address: regex },
-        { name: regex },
-      ]
-    })
-      .sort({ date: -1 })
-      .limit(20);
+    incidents = await searchIncident(regex);
   } else {
-    incidents = await Incident.find({})
-      .sort({ date: -1 })
-      .limit(20);
+    incidents = await getIncidents();
   }
 
   req.session.error = null;
@@ -38,20 +27,8 @@ router.get("/", async (req, res) => {
 router.post("/signup", async (req, res) => {
   const { username, password, name, email } = req.body;
 
-  const hash = crypto.createHash('sha256');
-  hash.update(password);
-  const hashedPassword = hash.digest('hex');
-
-  const user = new User({
-    username: username,
-    password: hashedPassword,
-    name: name,
-    email: email,
-  });
-
   // New code to verifie if the user already exists
-  const userExists = await User.findOne({ username: username });
-
+  const userExists = await accountExists(username);
   if (userExists) {
     console.log("User already exists");
     req.session.error = "Nom d'utilisateur déjà existant";
@@ -59,9 +36,9 @@ router.post("/signup", async (req, res) => {
   }
   // and end here
 
-  await user.save();
+  await createAccount(username, password, name, email);
 
-  req.session.user = { name: user.name };
+  req.session.user = { name: name };
 
   req.session.error = null;
 
